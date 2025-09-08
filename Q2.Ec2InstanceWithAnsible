@@ -1,0 +1,113 @@
+set DNS -> vim /etc/hosts
+
+go to
+
+vim /etc/ssh/sshd\_config -> 40, 65 yes -> in all 3
+
+systemctl restart sshd
+
+systemctl enable sshd
+
+
+
+GENERATE KEY IN CONTROLLER
+
+ssh-keygen
+
+cd. ssh/
+
+
+
+set password of root in both the nodes
+
+ssh-copy-id root@privateipofnode  -> to be done in controller machine
+
+or go and paste controller's id_rsa.pub to node cd .ssh/ cat authorized\_keys
+
+scp /etc/hosts root@privateipofnode:/etc/hosts
+
+
+IN CONTROLLER
+
+yum update -y
+
+yum install pip
+
+yum install ansible-core\*
+
+ansible --version
+
+cd /etc/
+
+mkdir ansible if not present
+
+or else go to cd /etc/ansible
+
+yum install httpd
+systemctl start httpd
+systemctl enable httpd
+
+Go to sir's repo -> https://github.com/sanjayguruji/ansible-code
+
+copy content of ansible.cfg
+
+and create a vim ansible.cfg and paste the content
+
+ansible --version
+
+make group wise implementation
+
+
+in cd /etc/ansible
+vim hosts
+
+[dev-server]
+machine name
+
+------------------------------
+
+
+mkdir /project-x
+
+cd /project-x/
+
+write playbook.yaml
+
+ansible-playbook firstplaybook.yaml --syntax-check
+
+ansible-playbook firstplaybook.yaml -C  (dry run)
+
+ansible-playbook firstplaybook.yaml
+
+
+
+---
+- name: creating ec2 instance
+  hosts: localhost
+  vars_files:
+
+      - creds.yaml
+  tasks:
+        - name: creating Ec2 instance via Ansible
+          amazon.aws.ec2_instance:
+            name: k8s-master
+            instance_type: t2.medium
+            image_id: ami-0a7d80731ae1b2435
+            vpc_subnet_id: subnet-0ff76343d2a62ca85
+            security_group: sg-07befa9a91f333167
+            key_name: devops-key
+            region: us-east-1
+            count: 1
+            state: present
+
+#install awscli on your ansible controller
+#configure Awscli
+#python should be installed
+#install pip install botocore
+#install pip install boto3
+#store your creds in creds.yaml on different location
+#maintain your inventory file
+#[localhost]
+#localhost
+#localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3
+#ansible-playbook localhost create-aws-ec2.yaml
