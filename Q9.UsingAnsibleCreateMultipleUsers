@@ -82,10 +82,10 @@ ansible-playbook firstplaybook.yaml
 
 ---
 - name: create multiple users
-  hosts: all
+  hosts: localhost
   tasks:
     - name: create multiple users
-      user:
+      amazon.aws.iam_user:
         name: "{{ item }}"
         state: present
       loop:
