@@ -116,3 +116,7 @@ ansible-playbook firstplaybook.yaml
 pip install boto3 botocore
 pip install ansible
 #Configure aws on controller
+#Use this command
+ansible-galaxy collection install
+amazon.aws
+ansible-playbook ec2_create.yml
