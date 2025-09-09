@@ -111,3 +111,8 @@ ansible-playbook firstplaybook.yaml
 #localhost
 #localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 #ansible-playbook localhost create-aws-ec2.yaml
+
+#yum install python3-pip -y
+pip install boto3 botocore
+pip install ansible
+#Configure aws on controller
