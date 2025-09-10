@@ -110,11 +110,7 @@ resource "aws_eip" "sanjay-ec2-eip" {
   instance = aws_instance.sanjay-server.id
 }
 
-#ssh keypair code
-resource "aws_key_pair" "ltimindtree" {
-  key_name   = "ltitestkey"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRE4i+Rl5U9JGJR94UxdcWcYUaMdi2+1PTBWDNZ2/IZWsf52kbqgmuZdf65274SI7mPH/LNQ5k70DUTREl35dbSeW2E1qeUAOpjyevR/7Nk8mEiwBnqzuYTjJi4TglIcL3FGnkRqZXrHFTQxhIHWIRq1FVsALdB0G8eBA/RsmBR9kFAOzzW9fsmEdi0h1gUx+KhasAnizHr8cuTfj+lTkchHIl0Nh4k8SJrndFxukkAAMbRRy5HTiHjXgyG7DtOdwJEQN7NurrpeaNFKvbyR9Vp9HbOwCG+lKo01LM+imtcdNxZTOoUz5McKQ+HLg9xZNEjNF1ln7WTYG9paVSND/11rE5ZLGHqCTWUYwnhftCMywHEJCBXsswGaYCzBidg/bWciA9Z6MUxkQn+8YV8Z+Kl3gaab++DRYf4jsZOgL5KUFOXXUhCpud8Fgsgjfos6x67FyNVKlNpw0qwU4iWU1p30/ssH6e/V8vYhTnN30CoOMN+fadVJ15VmdsZHgG7hE= root@ip-172-31-12-94.ap-south-1.compute.internal"
-}
+
 
 ###this is database ec2 code
 resource "aws_instance" "database-server" {
@@ -158,3 +154,33 @@ resource "aws_route_table_association" "private-asso" {
   subnet_id      = aws_subnet.private-subnet.id
   route_table_id = aws_route_table.private-rt.id
 }
+
+
+install terraform
+https://developer.hashicorp.com/terraform/install
+
+aws configure
+
+then create a vpc.tf file 
+copy the content from vpc.txt
+
+
+Two instance will be created
+One public one private server
+connect the public server to the instance
+then copy the content of key.pem file from 
+you local machine to the public machine
+and create a vim key.pem and paste the content
+of key inside it
+
+then copy the connect link of private machine
+paste it inside the public machine
+and then the private machine will be connected
+through the public machine
+then ping google
+and internet will be accessible
+--------------------------------------------
+
+copy existing key inside vim My-Vpc.pem 
+then chmod 400 My-Vpc.pem
+Then connect the private instance
